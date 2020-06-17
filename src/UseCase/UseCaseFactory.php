@@ -152,14 +152,13 @@ class UseCaseFactory implements UseCaseFactoryInterface
 
             if (!$this->executeMethod->getParameters()[0]->getClass()->isInstance($request)) {
                 $message = "Method %s in %s must be %s, you passed %s.";
-                $args = [
-                    $message,
+                $parameters = [
                     $this->executeMethod->getName(),
                     get_class($this->useCase),
                     $this->executeMethod->getParameters()[0]->getClass()->getName(),
                     get_class($request)
                 ];
-                throw new InvalidUseCaseException(sprintf($message, ...$args));
+                throw new InvalidUseCaseException(sprintf($message, ...$parameters));
             }
 
             $args[] = $request;
